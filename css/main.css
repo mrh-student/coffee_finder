@@ -1,0 +1,31 @@
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+.jumbotron, main, .table, .result {
+    text-align: center;
+}
+
+.jumbotron {
+    background-image: url("../images/bg04.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.jumbotron h1 {
+    font-family: 'Cabin Sketch', cursive;
+    font-size: 3.8em;
+    text-transform: lowercase;
+}
+
+.result {
+    margin: auto;
+    margin-top: 25px;
+}
+
+.table {
+    min-width: 550px;
+}
+
