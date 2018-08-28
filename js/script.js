@@ -1,7 +1,4 @@
 function time(){
-    gapi.load('auth2', function() {
-        // Library loaded.
-      });
     var now= moment().format("dddd");
     if(now == "Sunday"){
         var weekday = 0
@@ -27,8 +24,12 @@ function get_coffee(weekday){
 
     delete_table();
 
-    var place_list =["ChIJ71NSoA-QREgRSi5-5BHm3rY","ChIJZQx2URiQREgR-IrnCqqKRQA","ChIJtQP4UhCQREgRMsUvHPZO6fI","ChIJCVc1oBCQREgR5fMws2OyUC8","ChIJh5de6RqQREgR2jn1JXzZMvs","ChIJk9vL0xaQREgRvI49nyqC_7o","ChIJK4qBWw6QREgRtMorlPJ5kKo","ChIJZxVqggWQREgRz_v7tdgcWKE","ChIJIT9A9Q-QREgRefkAx34T_Yo","ChIJtYH14A-QREgRxyB6M683veM","ChIJp6lWZRGQREgRMmC6w1hWLDc","ChIJG9LbsBaQREgR9BBXD1EtS8o","ChIJf9xyhBmQREgRuxYbOT8ZGAc","ChIJ6Z8_ANGRREgRCUDOKP4Bppg","ChIJacu1wA-QREgRfB5BS0A-LXw"];
+    var place_list =["ChIJ71NSoA-QREgRSi5-5BHm3rY","ChIJZQx2URiQREgR-IrnCqqKRQA","ChIJtQP4UhCQREgRMsUvHPZO6fI","ChIJCVc1oBCQREgR5fMws2OyUC8","ChIJh5de6RqQREgR2jn1JXzZMvs","ChIJk9vL0xaQREgRvI49nyqC_7o","ChIJK4qBWw6QREgRtMorlPJ5kKo","ChIJZxVqggWQREgRz_v7tdgcWKE","ChIJIT9A9Q-QREgRefkAx34T_Yo","ChIJtYH14A-QREgRxyB6M683veM","ChIJp6lWZRGQREgRMmC6w1hWLDc","ChIJG9LbsBaQREgR9BBXD1EtS8o","ChIJf9xyhBmQREgRuxYbOT8ZGAc","ChIJ6Z8_ANGRREgRCUDOKP4Bppg","ChIJacu1wA-QREgRfB5BS0A-LXw","ChIJq4ERkxeQREgRdtS2u-zpZsU"];
+    
     var API_key = "AIzaSyDqv_tc23G6BYtlNsuiVDIVi8CuOUsMJiI";
+    
+    
+    
     var open_list = [];
 
     for (i=0 ; i < place_list.length; i++) {
@@ -67,17 +68,19 @@ function get_coffee(weekday){
             }
 
             if(name=="Portafilter"){
-                var address = "88 North Main Street, Cork";
+                var address = "88 North Main Street";
             } else if(name =="pop* coffee"){
-                var address = "11 Saint Patrick's Quay, Cork";
+                var address = "11 Saint Patrick's Quay";
             }else {
-                var address = data.result.vicinity;
+                var address_raw = data.result.vicinity;
+                var address = address_raw.slice(0,-6);
             }
             
             if(name=="Café Eco"){
                 var close ="open 24hrs";
             } else {
-                var close = data.result.opening_hours.periods[weekday].close.time;
+                var close_raw = data.result.opening_hours.periods[weekday].close.time;
+                var close = close_raw.slice(0, 2) + ":" + close_raw.slice(2);
             }
 
             if (open == true){
@@ -117,10 +120,6 @@ function get_coffee(weekday){
             }
         })
     }
-
-    /* var index = open_list.indexOf(open_entry);
-    $("#td_rating-"+i).append(star_rating);
-    document.getElementById("td_rating-"+i).innerHTML= star_rating; */
 }
 
 function delete_table(){

@@ -12,11 +12,12 @@ body {
 }
 
 .jumbotron {
-    background-image: url("../images/bg04.jpg");
+    background-image: url("../images/bg08.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    color: white;
+    color: rgb(255, 255, 255);
+    /* color: rgb(66, 66, 66); */
     min-height: 30vh;
     padding: 24px 12px;
     width: 100vw;
@@ -37,7 +38,7 @@ body {
     min-width: 400px;
 }
 .head-wrapper {
-    margin-top: 10%;
+    margin-top: 7vh;
 }
 
 .checked, .far{
