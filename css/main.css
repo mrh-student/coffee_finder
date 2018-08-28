@@ -12,6 +12,8 @@ body {
     background-size: cover;
     background-position: center;
     color: white;
+    min-height: 30vh;
+    padding: 24px 12px;
 }
 
 .jumbotron h1 {
@@ -26,6 +28,13 @@ body {
 }
 
 .table {
-    min-width: 550px;
+    min-width: 400px;
+}
+.head-wrapper {
+    margin-top: 10%;
+}
+
+.checked {
+    color: orange;
 }
 
