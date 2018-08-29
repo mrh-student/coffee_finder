@@ -1,3 +1,13 @@
+function showme(){
+    var item = document.getElementById("result");
+    if (item) {
+        if(item.className=='result hidden'){
+            item.className = 'result unhidden' ;
+        }else{
+            item.className = 'hidden';
+        }
+    }
+}
 
 function time(){
     var now= moment().format("dddd");
@@ -18,13 +28,28 @@ function time(){
     } else {
         console.log("oops, something went wrong converting weekdays")
     }
+
+    var action_button = document.getElementById("open");
+    var loader = document.getElementById("loader");
+    loader.hidden = false;
+    action_button.disabled = true;
+    action_button.innerText = 'Loading, 1 sec!';
+    
+    setTimeout(function(){
+        loader.hidden = true;
+        action_button.disabled = false;
+        action_button.innerText = "Refresh";
+        action_button.setAttribute("onClick","refresh()");
+        showme();
+    },7000);
+    
     coffeecall(weekday);
 }
 
 function coffeecall(weekday){
     delete_table();
-    var open_list = [];
     var request_list = [];
+    var results_list = [];
     var map = new google.maps.Map(document.getElementById("map"),{
         center: {lat: 51.903614, lng: -8.468399},
         zoom: 15
@@ -38,30 +63,125 @@ function coffeecall(weekday){
             fields: ['name', 'rating', 'vicinity', 'opening_hours']
         };
         request_list.push(request);
+       
 
         (function (i) {
             // console.log(request_list[i]);
             setTimeout(function (){
                 service = new google.maps.places.PlacesService(map);
                 service.getDetails(request_list[i], callback);
-                
             }, 300 * i);
         })(i);
         function callback(place, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 var is_open = place.opening_hours.open_now;
                 if(is_open == true){
-                    list_setup(place, weekday, open_list);
+                    results_list.push(place);
+                    console.log(place.name + " is open")
                 } else {
                     console.log(place.name + " not open")
                 }
             }
         } 
     }
-    
+    setTimeout(function(){
+    console.log(results_list);
+    list_setup(results_list,weekday);
+    }, 6000);
 }
 
-function list_setup(place,weekday, open_list){
+function list_setup(results_list,weekday){
+    results_list.sort(function(a,b){
+        return b.rating-a.rating;
+    })
+    for(i=0; i < results_list.length; i++){
+        var name = results_list[i].name;
+        var rating = results_list[i].rating;
+
+        if(rating < 0.5){
+            star_rating = "<span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span>";
+        } else if(rating >= 0.5 && rating < 1){
+            star_rating = "<span class='fas fa-star-half-alt checked'></span><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span>";
+        } else if(rating >= 1 && rating < 1.5){
+            star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span>";
+        } else if(rating >= 1.5 && rating < 2){
+            star_rating = "<span class='fa fa-star checked'></span><span class='fas fa-star-half-alt checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star'></span><span class='fa fa-star'></span>";
+        } else if(rating >= 2 && rating < 2.5){
+            star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span>";
+        } else if(rating >= 2.5 && rating < 3){
+            star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fas fa-star-half-alt checked'></span><span class='fa fa-star'></span><span class='fa fa-star'></span>";
+        } else if(rating >= 3 && rating < 3.5){
+            star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star'></span><span class='fa fa-star'></span>";
+        } else if(rating >= 3.5 && rating < 4){
+            star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fas fa-star-half-alt checked'></span><span class='fa fa-star'></span>";
+        } else if(rating >= 4 && rating < 4.5){
+            star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='far fa-star'></span>";
+        } else if(rating >= 4.5 && rating < 5){
+            star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fas fa-star-half-alt checked'></span>";
+        } else if(rating = 5){
+            star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span>";
+        } else {
+            console.log("oops, something went wrong with the rating");
+        }
+
+        if(name=="Portafilter"){
+            var address = "88 North Main Street";
+        } else if(name =="pop* coffee"){
+            var address = "11 Saint Patrick's Quay";
+        }else {
+            var address_raw = results_list[i].vicinity;
+            var address = address_raw.slice(0,-6);
+        }
+                
+        if(name=="Café Eco"){
+            var close ="open 24hrs";
+        } else {
+            var close_raw = results_list[i].opening_hours.periods[weekday].close.time;
+            var close = close_raw.slice(0, 2) + ":" + close_raw.slice(2);
+        }
+        console.log(name,rating, address, star_rating, close);
+        create_table(name, star_rating,address,close, results_list);
+    }
+}
+
+function create_table(name,star_rating,address,close, results_list){
+    var tr = document.createElement("tr");
+    document.getElementById("coffee-table").appendChild(tr);
+
+    var td_name = document.createElement("td");
+    var node_name = document.createTextNode(name);
+    tr.appendChild(td_name);
+    td_name.appendChild(node_name);
+
+    var td_address = document.createElement("td");
+    var node_address = document.createTextNode(address);
+    tr.appendChild(td_address);
+    td_address.appendChild(node_address);
+
+    var td_close = document.createElement("td");
+    var node_close = document.createTextNode(close);
+    tr.appendChild(td_close);
+    td_close.appendChild(node_close);
+
+    var index = results_list.indexOf(results_list[i]);
+    
+    var td_rating = document.createElement("td");
+    td_rating.id= "td_rating-"+index;
+    tr.appendChild(td_rating);
+    document.getElementById("td_rating-"+index).innerHTML= star_rating;
+}
+
+function delete_table(){
+var clear = document.getElementById("coffee-table");
+clear.innerHTML = '';
+}
+
+function refresh(){
+    location.reload();
+}
+
+
+function list_setup_1(place,weekday, open_list){
     var name = place.name;
     var rating = place.rating;
             
@@ -109,36 +229,4 @@ function list_setup(place,weekday, open_list){
     var open_entry = name+address+rating
     open_list.push(open_entry);
     create_table(name, star_rating,address,close, open_entry,open_list);
-}
-
-function create_table(name,star_rating,address,close, open_entry,open_list){
-    var tr = document.createElement("tr");
-    document.getElementById("coffee-table").appendChild(tr);
-
-    var td_name = document.createElement("td");
-    var node_name = document.createTextNode(name);
-    tr.appendChild(td_name);
-    td_name.appendChild(node_name);
-
-    var td_address = document.createElement("td");
-    var node_address = document.createTextNode(address);
-    tr.appendChild(td_address);
-    td_address.appendChild(node_address);
-
-    var td_close = document.createElement("td");
-    var node_close = document.createTextNode(close);
-    tr.appendChild(td_close);
-    td_close.appendChild(node_close);
-
-    var index = open_list.indexOf(open_entry);
-
-    var td_rating = document.createElement("td");
-    td_rating.id= "td_rating-"+index;
-    tr.appendChild(td_rating);
-    document.getElementById("td_rating-"+index).innerHTML= star_rating;
-}
-
-function delete_table(){
-var clear = document.getElementById("coffee-table");
-clear.innerHTML = '';
 }

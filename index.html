@@ -21,7 +21,7 @@
     <title>Cork Coffee Finder</title>
 
 </head>
-<body>
+<body onload="time()">
     <header>
         <div class="jumbotron">
             <div class="head-wrapper">
@@ -35,8 +35,9 @@
         <div class="container content">
             <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-primary" onclick="time()">What's open?</button>
-                    <div class="result">
+                    <button class="btn btn-primary" id ="open"></button>
+                    <div><img src="./images/loading.gif" id="loader"></div>
+                    <div class="result hidden" id="result">
                         <table class="table table-striped table-borderless table-responsive">
                             <thead>
                                 <tr>

@@ -2,7 +2,7 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
-.jumbotron, main, .table, .result {
+.jumbotron, main, .table, .result, .col-12 {
     text-align: center;
 }
 
@@ -22,6 +22,7 @@ body {
     padding: 24px 12px;
     width: 100vw;
     border-radius: 0;
+    z-index: 1;
 }
 
 .jumbotron h1 {
@@ -53,6 +54,43 @@ body {
 .checked, .far{
     color: orange;
 }
+
+.result.hidden{
+    display:none;
+}
+
+.result.unhidden{
+    display:block;
+}
+
+#loader {
+    margin: auto;
+    margin-top: 25px;
+    /* border: 16px solid rgb(196, 196, 196); */
+    /* border-radius: 50%;
+    border-top: 16px solid rgb(114, 171, 255); */
+    width: 400px;
+    height: 400px;
+    -webkit-animation: spin 7s ease-in-out infinite; /* Safari */
+    animation: spin 7s ease-in-out infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    33% { -webkit-transform: rotate(45deg); }
+    66% {-webkit-transform: rotate(-45deg); }
+    100% {-webkit-transform: rotate(0deg); }
+    
+  }
+  
+  @keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    33% { -webkit-transform: rotate(45deg); }
+    66% {-webkit-transform: rotate(-45deg); }
+    100% {-webkit-transform: rotate(0deg); }
+    
+  }
 
 @media (max-width: 768px){
     .table {
