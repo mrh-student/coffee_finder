@@ -35,6 +35,10 @@ body {
     margin-top: 25px;
 }
 
+#map{
+    display: none;
+}
+
 .table {
     min-width: 400px;
 }
