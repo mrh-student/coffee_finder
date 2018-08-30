@@ -39,7 +39,25 @@ function time(){
     var loader = document.getElementById("loader");
     loader.hidden = false;
     action_button.disabled = true;
-    action_button.innerText = 'Loading, 1 sec!';
+    action_button.innerText = "Checking what's open, like";
+    setTimeout(function(){
+        action_button.innerText = "Checking what's open, like.";
+    },1000);
+    setTimeout(function(){
+        action_button.innerText = "Checking what's open, like..";
+    },2000);
+    setTimeout(function(){
+        action_button.innerText = "Checking what's open, like...";
+    },3000);
+    setTimeout(function(){
+        action_button.innerText = "Checking what's open, like..";
+    },4000);
+    setTimeout(function(){
+        action_button.innerText = "Checking what's open, like.";
+    },5000);
+    setTimeout(function(){
+        action_button.innerText = "Checking what's open, like";
+    },6000);
     
     setTimeout(function(){
         loader.hidden = true;
