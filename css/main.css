@@ -166,6 +166,9 @@ footer a, footer a:hover, footer a:active {
     .fa, .fas, .far {
         font-size: 3.1pt;
     }
+    .fa-angle-up, .fa-angle-down {
+        font-size: 2em;
+    }
     #loader {
         top:40%;
         width: 40%;
@@ -175,7 +178,7 @@ footer a, footer a:hover, footer a:active {
 
 @media (max-height:750px) and (max-width:400px){
     #loader {
-        top:55%;
+        top:60%;
         width: 50%;
         left: 25%;
     }
