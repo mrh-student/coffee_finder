@@ -175,7 +175,7 @@ footer a, footer a:hover, footer a:active {
 
 @media (max-height:750px) and (max-width:400px){
     #loader {
-        top:50%;
+        top:55%;
         width: 50%;
         left: 25%;
     }

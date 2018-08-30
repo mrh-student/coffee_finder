@@ -22,7 +22,6 @@ function showme(){
 
 function time(){
     var hours = moment().format("HH:mm");
-    console.log(hours);
     var now= moment().format("dddd");
     if(now == "Sunday"){
         var weekday = 0
@@ -120,7 +119,6 @@ function coffeecall(weekday){
         } 
     }
     setTimeout(function(){
-    console.log(results_list);
     list_setup(results_list,weekday);
     }, 6000);
 }
