@@ -1,3 +1,14 @@
+$(document).ready(function(){
+    $('#footer').hover(function(){
+        $('#arrow').removeClass("fa-angle-up");
+        $('#arrow').addClass("fa-angle-down");
+    },
+    function(){
+        $('#arrow').addClass("fa-angle-up");
+    });
+});
+
+
 function showme(){
     var item = document.getElementById("result");
     if (item) {
@@ -202,55 +213,4 @@ clear.innerHTML = '';
 
 function refresh(){
     location.reload();
-}
-
-
-function list_setup_1(place,weekday, open_list){
-    var name = place.name;
-    var rating = place.rating;
-            
-    if(rating < 0.5){
-        star_rating = "<span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span>";
-    } else if(rating >= 0.5 && rating < 1){
-        star_rating = "<span class='fas fa-star-half-alt checked'></span><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span>";
-    } else if(rating >= 1 && rating < 1.5){
-        star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span>";
-    } else if(rating >= 1.5 && rating < 2){
-        star_rating = "<span class='fa fa-star checked'></span><span class='fas fa-star-half-alt checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star'></span><span class='fa fa-star'></span>";
-    } else if(rating >= 2 && rating < 2.5){
-        star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star'></span>";
-    } else if(rating >= 2.5 && rating < 3){
-        star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fas fa-star-half-alt checked'></span><span class='fa fa-star'></span><span class='fa fa-star'></span>";
-    } else if(rating >= 3 && rating < 3.5){
-        star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star'></span><span class='fa fa-star'></span>";
-    } else if(rating >= 3.5 && rating < 4){
-        star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fas fa-star-half-alt checked'></span><span class='fa fa-star'></span>";
-    } else if(rating >= 4 && rating < 4.5){
-        star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='far fa-star'></span>";
-    } else if(rating >= 4.5 && rating < 5){
-        star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fas fa-star-half-alt checked'></span>";
-    } else if(rating = 5){
-        star_rating = "<span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span>";
-    } else {
-        console.log("oops, something went wrong with the rating");
-    }
-
-    if(name=="Portafilter"){
-        var address = "88 North Main Street";
-    } else if(name =="pop* coffee"){
-        var address = "11 Saint Patrick's Quay";
-    }else {
-        var address_raw = place.vicinity;
-        var address = address_raw.slice(0,-6);
-    }
-            
-    if(name=="Café Eco"){
-        var close ="open 24hrs";
-    } else {
-        var close_raw = place.opening_hours.periods[weekday].close.time;
-        var close = close_raw.slice(0, 2) + ":" + close_raw.slice(2);
-    }
-    var open_entry = name+address+rating
-    open_list.push(open_entry);
-    create_table(name, star_rating,address,close, open_entry,open_list);
 }

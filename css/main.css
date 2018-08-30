@@ -6,11 +6,6 @@ body {
     text-align: center;
 }
 
-.table-responsive {
-    margin: auto;
-    display: inline;
-}
-
 .jumbotron {
     background-image: url("../images/bg08.jpg");
     background-repeat: no-repeat;
@@ -35,37 +30,6 @@ body {
     font-weight: 300;
 }
 
-.result {
-    margin: auto;
-    margin-top: 25px;
-}
-
-#map{
-    display: none;
-}
-
-.table {
-    min-width: 400px;
-}
-.head-wrapper {
-    margin-top: 7vh;
-}
-
-.head-wrapper p {
-    font-size: 1.2em;
-}
-
-.checked, .far{
-    color: orange;
-}
-
-.result.hidden{
-    display:none;
-}
-
-.result.unhidden{
-    display:block;
-}
 #loader {
     position: fixed;
     top: 30%;
@@ -94,6 +58,43 @@ body {
     
 }
 
+.result {
+    margin: auto;
+    margin-top: 25px;
+}
+
+.result.hidden{
+    display:none;
+}
+
+.result.unhidden{
+    display:block;
+    margin-bottom: 100px;
+}
+
+
+.table {
+    min-width: 400px;
+}
+
+.table-responsive {
+    margin: auto;
+    display: inline;
+}
+
+.head-wrapper {
+    margin-top: 7vh;
+}
+
+.head-wrapper p {
+    font-size: 1.2em;
+}
+
+.checked, .far{
+    color: orange;
+}
+
+
 footer {
     position: fixed;
     margin: auto; 
@@ -104,10 +105,10 @@ footer {
     font-weight: 100;
     line-height: 1.2em;
     font-size: 0.8em;
-    padding: 5px;
+    padding: 25px 10px 5px;
     /* border-radius: 25px; */
     color: white;
-    height: 10px;
+    height: 20px;
     -webkit-transition: height 2s; /* For Safari 3.1 to 6.0 */
     transition: height 2s;
     transition-property: height;
@@ -116,7 +117,7 @@ footer {
 }
 
 footer:hover{
-    height: 50px;
+    height: 70px;
 }
 
 footer a, footer a:hover, footer a:active {
@@ -129,6 +130,13 @@ footer a, footer a:hover, footer a:active {
     margin: auto;
 }
 
+.footer_arrow {
+    position: absolute;
+    /* left:10px; */
+    top: 0;
+    font-size: 2em;
+}
+
 .footer_cell {
     padding: 5px 5%;
     width: 30%;
@@ -138,8 +146,8 @@ footer a, footer a:hover, footer a:active {
     margin-top: 25px;
 }
 
-.table-striped {
-    margin-bottom:50px;
+#map{
+    display: none;
 }
 
 @media (max-width: 768px){
