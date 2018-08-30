@@ -10,6 +10,8 @@ function showme(){
 }
 
 function time(){
+    var hours = moment().format("HH:mm");
+    console.log(hours);
     var now= moment().format("dddd");
     if(now == "Sunday"){
         var weekday = 0
@@ -27,6 +29,10 @@ function time(){
         var weekday = 6
     } else {
         console.log("oops, something went wrong converting weekdays")
+    }
+
+    if (hours >= "19:01" || hours <= "05:00"){
+        document.getElementById("late").innerText="It's pretty late for coffee. You might have a problem..."
     }
 
     var action_button = document.getElementById("open");

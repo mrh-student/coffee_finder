@@ -31,6 +31,10 @@ body {
     text-transform: lowercase;
 }
 
+.jumbotron p {
+    font-weight: 300;
+}
+
 .result {
     margin: auto;
     margin-top: 25px;
@@ -93,22 +97,44 @@ body {
 footer {
     position: fixed;
     margin: auto; 
-    width: 50%; 
+    width: 100%; 
     bottom: 0;
-    left: 25%;
+    left: 0;
     text-align: center;
     font-weight: 100;
-    line-height: 1em;
+    line-height: 1.2em;
     font-size: 0.8em;
-    padding: 10px;
-    border-radius: 25px;
+    padding: 5px;
+    /* border-radius: 25px; */
     color: white;
     
+}
+
+footer a, footer a:hover, footer a:active {
+    color: orange;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.footer {
+    margin: auto;
+}
+
+.footer_cell {
+    padding: 5px 5%;
+    width: 30%;
+}
+
+#late {
+    margin-top: 25px;
 }
 
 @media (max-width: 768px){
     .table {
         font-size: 0.7em;
+    }
+    footer {
+        font-size: 0.5em;
     }
 }
 
