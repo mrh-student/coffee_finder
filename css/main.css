@@ -95,6 +95,7 @@ body {
     text-decoration: none;
     font-family: "Roboto", sans-serif;
     font-weight: 500;
+    background-image: url("")
 }
 
 .checked, .far{
@@ -155,6 +156,29 @@ footer a, footer a:hover, footer a:active {
 
 #map{
     display: none;
+}
+
+.table-borderless tbody+tbody, .table-borderless td, .table-borderless th, .table-borderless thead th {
+    border: 0;
+    vertical-align: middle;
+}
+
+.imagebox, .imagebox ::after {
+    height:150px;
+    width: 150px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    -webkit-transition: width, height 2s; /* For Safari 3.1 to 6.0 */
+    transition: width, height 2s;
+    transition-property: width, height;
+    transition-duration: 2s; 
+    transition-timing-function: ease;
+}
+
+.imagebox:hover {
+    height: 250px;
+    width: 250px;
 }
 
 @media (max-width: 768px){
