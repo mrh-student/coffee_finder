@@ -23,19 +23,19 @@ function showme(){
 function time(){
     var hours = moment().format("HH:mm");
     var now= moment().format("dddd");
-    if(now == "Sunday"){
+    if(now == "Monday"){
         var weekday = 0
-    } else if (now =="Monday"){
+    } else if (now =="Tuesday"){
         var weekday = 1
-    } else if (now == "Tuesday"){
+    } else if (now == "Wednesday"){
         var weekday = 2
-    } else if (now=="Wednesday"){
+    } else if (now=="Thursday"){
         var weekday = 3
-    } else if (now =="Thursday"){
+    } else if (now =="Friday"){
         var weekday = 4
-    } else if (now == "Friday"){
-        var weekday = 5
     } else if (now == "Saturday"){
+        var weekday = 5
+    } else if (now == "Sunday"){
         var weekday = 6
     } else {
         console.log("oops, something went wrong converting weekdays")
@@ -119,6 +119,7 @@ function coffeecall(weekday){
         } 
     }
     setTimeout(function(){
+    console.log(results_list);
     list_setup(results_list,weekday);
     }, 6000);
 }
