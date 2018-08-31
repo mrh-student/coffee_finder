@@ -129,7 +129,9 @@ function list_setup(results_list,weekday){
         return b.rating-a.rating;
     })
     for(i=0; i < results_list.length; i++){
+        // name 
         var name = results_list[i].name;
+        //rating
         var rating = results_list[i].rating;
 
         if(rating < 0.5){
@@ -158,6 +160,7 @@ function list_setup(results_list,weekday){
             console.log("oops, something went wrong with the rating");
         }
 
+        // address
         if(name=="Portafilter"){
             var address = "88 North Main Street";
         } else if(name =="pop* coffee"){
@@ -166,26 +169,36 @@ function list_setup(results_list,weekday){
             var address_raw = results_list[i].vicinity;
             var address = address_raw.slice(0,-6);
         }
-                
+        
+        //closing time
         if(name=="Café Eco"){
             var close ="open 24hrs";
         } else {
             var close_raw = results_list[i].opening_hours.periods[weekday].close.time;
             var close = close_raw.slice(0, 2) + ":" + close_raw.slice(2);
         }
-        console.log(name,rating, address, star_rating, close);
-        create_table(name, star_rating,address,close, results_list);
+
+        // google maps URL
+        var url = "https://www.google.com/maps/search/"+name+"+"+address+"+Cork/";
+        
+
+        console.log(name,rating, address,star_rating,close,url);
+        create_table(name,star_rating,address,close,url,results_list);
     }
 }
 
-function create_table(name,star_rating,address,close, results_list){
+function create_table(name,star_rating,address,close,url,results_list){
+
+    var index = results_list.indexOf(results_list[i]);
+
     var tr = document.createElement("tr");
     document.getElementById("coffee-table").appendChild(tr);
 
     var td_name = document.createElement("td");
-    var node_name = document.createTextNode(name);
+    td_name.id = "td_name-"+index;
+    td_name.className ="namelist";
     tr.appendChild(td_name);
-    td_name.appendChild(node_name);
+    document.getElementById("td_name-"+index).innerHTML= "<a href='"+url+"' target=_blank>"+name+"</a>"
 
     var td_address = document.createElement("td");
     var node_address = document.createTextNode(address);
@@ -196,8 +209,6 @@ function create_table(name,star_rating,address,close, results_list){
     var node_close = document.createTextNode(close);
     tr.appendChild(td_close);
     td_close.appendChild(node_close);
-
-    var index = results_list.indexOf(results_list[i]);
     
     var td_rating = document.createElement("td");
     td_rating.id= "td_rating-"+index;
