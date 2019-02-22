@@ -23,23 +23,23 @@ function time(){
     var hours = moment().format("HH:mm");
     var now= moment().format("dddd");
     if(now == "Monday"){
-        var weekday = 0
-    } else if (now =="Tuesday"){
         var weekday = 1
-    } else if (now == "Wednesday"){
+    } else if (now =="Tuesday"){
         var weekday = 2
-    } else if (now=="Thursday"){
+    } else if (now == "Wednesday"){
         var weekday = 3
-    } else if (now =="Friday"){
+    } else if (now=="Thursday"){
         var weekday = 4
-    } else if (now == "Saturday"){
+    } else if (now =="Friday"){
         var weekday = 5
-    } else if (now == "Sunday"){
+    } else if (now == "Saturday"){
         var weekday = 6
+    } else if (now == "Sunday"){
+        var weekday = 0
     } else {
         console.log("oops, something went wrong converting weekdays")
     }
-
+    console.log(weekday);
     if (hours >= "19:01" || hours <= "05:00"){
         document.getElementById("late").innerText="It's pretty late for coffee. You might have a problem..."
     }
@@ -87,7 +87,7 @@ function coffeecall(weekday){
         center: {lat: 51.903614, lng: -8.468399},
         zoom: 15
     }); 
-    var place_list = ["ChIJ71NSoA-QREgRSi5-5BHm3rY","ChIJZQx2URiQREgR-IrnCqqKRQA","ChIJtQP4UhCQREgRMsUvHPZO6fI","ChIJCVc1oBCQREgR5fMws2OyUC8","ChIJh5de6RqQREgR2jn1JXzZMvs","ChIJk9vL0xaQREgRvI49nyqC_7o","ChIJK4qBWw6QREgRtMorlPJ5kKo","ChIJZxVqggWQREgRz_v7tdgcWKE","ChIJIT9A9Q-QREgRefkAx34T_Yo","ChIJtYH14A-QREgRxyB6M683veM","ChIJp6lWZRGQREgRMmC6w1hWLDc","ChIJG9LbsBaQREgR9BBXD1EtS8o","ChIJf9xyhBmQREgRuxYbOT8ZGAc","ChIJ6Z8_ANGRREgRCUDOKP4Bppg","ChIJacu1wA-QREgRfB5BS0A-LXw","ChIJq4ERkxeQREgRdtS2u-zpZsU","ChIJD2uNdReQREgRbZ4vfjxOQG8","ChIJgxGCWxCQREgRqp9b9BkEjxs","ChIJudvXdxqQREgRjJWDk-ywgPc"];
+    var place_list = ["ChIJ71NSoA-QREgRSi5-5BHm3rY","ChIJZQx2URiQREgR-IrnCqqKRQA","ChIJtQP4UhCQREgRMsUvHPZO6fI","ChIJCVc1oBCQREgR5fMws2OyUC8","ChIJh5de6RqQREgR2jn1JXzZMvs","ChIJk9vL0xaQREgRvI49nyqC_7o","ChIJK4qBWw6QREgRtMorlPJ5kKo","ChIJZxVqggWQREgRz_v7tdgcWKE","ChIJIT9A9Q-QREgRefkAx34T_Yo","ChIJtYH14A-QREgRxyB6M683veM","ChIJp6lWZRGQREgRMmC6w1hWLDc","ChIJG9LbsBaQREgR9BBXD1EtS8o","ChIJf9xyhBmQREgRuxYbOT8ZGAc","ChIJ6Z8_ANGRREgRCUDOKP4Bppg","ChIJacu1wA-QREgRfB5BS0A-LXw","ChIJq4ERkxeQREgRdtS2u-zpZsU","ChIJD2uNdReQREgRbZ4vfjxOQG8","ChIJgxGCWxCQREgRqp9b9BkEjxs","ChIJudvXdxqQREgRjJWDk-ywgPc", "ChIJcyCyrT2RREgRghyRx0rxxy0"];
     var place_length = place_list.length;
 
     for (i = 0; i < place_length; i++){
@@ -97,14 +97,13 @@ function coffeecall(weekday){
         };
         request_list.push(request);
        
-
         (function (i) {
             // console.log(request_list[i]);
             setTimeout(function (){
                 service = new google.maps.places.PlacesService(map);
                 service.getDetails(request_list[i], callback);
             }, 300 * i);
-        })(i);
+            })(i);
         function callback(place, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 var is_open = place.opening_hours.open_now;
@@ -178,6 +177,7 @@ function list_setup(results_list,weekday){
         } else {
             var close_raw = results_list[i].opening_hours.periods[weekday].close.time;
             var close = close_raw.slice(0, 2) + ":" + close_raw.slice(2);
+            console.log(results_list[i].opening_hours.periods[weekday].close.time);
         }
 
         // google maps URL
@@ -279,7 +279,13 @@ function list_setup(results_list,weekday){
                 name: "Café Eco",
                 id: 18,
                 image: "./images/cafes/eco.jpg"
+            },
+            {
+                name: "Lab 82",
+                id: 19,
+                image: "./images/cafes/lab82.png"
             }
+
         ]
         console.log(image_list[0].url);
 
@@ -321,7 +327,9 @@ function list_setup(results_list,weekday){
             var img_url = image_list[16].image;
         } else if (name == "Café Eco"){
             var img_url = image_list[18].image;
-        }
+        } else if (name == "Lab 82"){
+            var img_url = image_list[19].image;
+        } 
         
 
         // console.log(name,rating, address,star_rating,close,url);

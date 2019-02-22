@@ -155,7 +155,10 @@ footer a, footer a:hover, footer a:active {
 }
 
 #map{
-    display: none;
+    /* display: none; */
+    height: 400px;
+    width: 450px;
+    margin: auto;
 }
 
 .table-borderless tbody+tbody, .table-borderless td, .table-borderless th, .table-borderless thead th {
