@@ -152,7 +152,6 @@ function runCoffeeSearch(){
 }
 
 // gets data from all shops in cafeListObject from Google Places API
-//TODO: replace open_now with isOpen
 function getResults(cafeListObject){
     
     let requestsList = []
@@ -166,7 +165,7 @@ function getResults(cafeListObject){
     for (i=0; i < cafeListObject.length; i++){
         let request = {
             placeId : cafeListObject[i].placesid,
-            fields: ['place_id','name', 'rating', 'vicinity', 'opening_hours']
+            fields: ['place_id','name', 'rating', 'vicinity', 'opening_hours','utc_offset_minutes']
         }
         requestsList.push(request)
     }
@@ -182,7 +181,7 @@ function getResults(cafeListObject){
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                     queryResults.push(place)
                     console.log(place)
-                    console.log(place.place_id + " - " + place.name + " - open now:" + place.open_now)
+                    console.log(place.place_id + " - " + place.name + " - open now:" + place.opening_hours.isOpen())
             }
         }
     }
@@ -190,7 +189,6 @@ function getResults(cafeListObject){
 }
 
 // checks if shops are open, styles the output (formatting, images)
-//TODO: replace open_now with isOpen
 function styleResults(queryResults, cafeListObject){
     
     const weekday = getWeekday()
@@ -200,7 +198,7 @@ function styleResults(queryResults, cafeListObject){
     // loop through list of results. Get name, rating, close time, address, url, image
     for(i=0; i < queryResults.length; i++){
 
-        if(queryResults[i].opening_hours.open_now == true){
+        if(queryResults[i].opening_hours.isOpen()){
             //get id
             const uniqueID = queryResults[i].place_id;
             //get name
