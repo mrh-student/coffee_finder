@@ -155,10 +155,7 @@ footer a, footer a:hover, footer a:active {
 }
 
 #map{
-    /* display: none; */
-    height: 400px;
-    width: 450px;
-    margin: auto;
+    display: none;
 }
 
 .table-borderless tbody+tbody, .table-borderless td, .table-borderless th, .table-borderless thead th {
@@ -204,7 +201,7 @@ footer a, footer a:hover, footer a:active {
         font-size: 2em;
     }
     #loader {
-        top:40%;
+        top:50%;
         width: 40%;
         left: 30%;
     }
