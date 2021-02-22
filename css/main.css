@@ -39,6 +39,7 @@ body {
     margin-top: 25px;
     -webkit-animation: spin 7s ease-in-out infinite;
     animation: spin 7s ease-in-out infinite;
+    visibility: hidden;
 }
   
 /* Safari */
@@ -221,6 +222,3 @@ footer a, footer a:hover, footer a:active {
         left: 35%;
     }
 }
-
-
-
